@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.KeyVault/vaults/AbdunKeyVault",
+      "type": "secrets.keyVault",
+      "connectionId": "LoanDbUri",
+      "secretStore": "AzureAppSettings"
+    },
+    "mssql1": {
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/testdbserverabdun/databases/TestDb",
+      "type": "mssql.azure",
+      "connectionId": "DevConnection",
+      "secretStore": "AzureKeyVault"
+    }
+  }
+}

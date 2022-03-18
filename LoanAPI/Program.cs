@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Azure.Identity;
 
-namespace PaymentAPI
+namespace LoanAPI
 {
     public class Program
     {
@@ -21,7 +21,7 @@ namespace PaymentAPI
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, config) =>
                 {
-                var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("TestDb"));
+                var keyVaultEndpoint = new Uri(Environment.GetEnvironmentVariable("LoanDbUri"));
                 config.AddAzureKeyVault(
                 keyVaultEndpoint,
                 new DefaultAzureCredential());

@@ -34,9 +34,9 @@ namespace PaymentAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "PaymentAPI", Version = "v1" });
             });
 
-            services.AddDbContext<PaymentDetailContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-
+            //services.AddDbContext<PaymentDetailContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
+            
             services.AddCors();
         }
 
@@ -44,16 +44,16 @@ namespace PaymentAPI
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors(options =>
-            options.WithOrigins("http://localhost:4200")
+            options.WithOrigins("https://witty-beach-0aaa3850f.1.azurestaticapps.net")
             .AllowAnyMethod()
             .AllowAnyHeader());
 
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PaymentAPI v1"));
-            }
+            //if (env.IsDevelopment())
+            //{
+                //app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PaymentAPI v1"));
+            //}
 
             app.UseRouting();
 

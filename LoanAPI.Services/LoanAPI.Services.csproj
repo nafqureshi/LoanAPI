@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LoanAPI.Data.DBRepository\LoanAPI.Data.DBRepository.csproj" />
+    <ProjectReference Include="..\LoanAPI.Services.Repository\LoanAPI.Services.Repository.csproj" />
+  </ItemGroup>
+
+</Project>
