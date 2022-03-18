@@ -11,6 +11,6 @@ namespace LoanAPI.Data.DBRepository.Entity
         [Key]
         public int InstitutionId { get; set; }
 
-        public decimal LoanAmount { get; set; }
+        public int LoanAmount { get; set; }
     }
 }

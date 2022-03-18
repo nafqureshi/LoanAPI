@@ -23,20 +23,17 @@ namespace LoanAPI.Services
 
         public LoanService(StudentLoanDbContext context)
         {
-            this.context = context;
-
-            loanDetails = FetchData(this.context);
+            this.context = context;            
+            loanDetails = FetchData();
         }
 
         public LoanDetail GetLoanDetail(int studentId, int institutionId)
         {
-            loanDetails = FetchData(context);
             return loanDetails.ToList().FirstOrDefault(ld => ld.StudentId == studentId && ld.InstitutionId == institutionId);
         }
 
         public IEnumerable<LoanDetail> GetLoanDetails()
         {
-            loanDetails = FetchData(context);
             return loanDetails;
         }
 
@@ -61,10 +58,6 @@ namespace LoanAPI.Services
                 InstitutionId = loanDetail.InstitutionId,
                 LoanAmount = loanDetail.LoanAmount
             };
-
-            context.Entry(student).State = EntityState.Added;
-            context.Entry(institution).State = EntityState.Added;
-            context.Entry(loan).State = EntityState.Detached;
 
             context.InsertLoanDetails(student, institution, loan);
 
@@ -96,45 +89,41 @@ namespace LoanAPI.Services
                 LoanAmount = loanDetail.LoanAmount
             };
 
-            context.Entry(student).State = EntityState.Detached;
-            context.Entry(institution).State = EntityState.Detached;
-            context.Entry(loan).State = EntityState.Detached;
-
             context.UpdateLoanDetails(student, institution, loan);
         }
 
         public bool LoanDetailExists(int studentId, int institutionId)
         {
-            loanDetails = FetchData(context);
+            loanDetails = FetchData();
             return loanDetails.Any(ld => ld.StudentId == studentId && ld.InstitutionId == institutionId);
         }
 
 
-        private IEnumerable<LoanDetail> FetchData(StudentLoanDbContext context)
+        private IEnumerable<LoanDetail> FetchData()
         {
-            return context.Loan.Join(context.Student,
-                                    loan => loan.StudentId,
-                                    student => student.StudentId,
-                                    (loan, student) => new LoanDetail
-                                    {
-                                        StudentId = student.StudentId,
-                                        FirstName = student.FirstName,
-                                        LastName = student.LastName,
-                                        LoanAmount = loan.LoanAmount,
-                                        InstitutionId = loan.InstitutionId
-                                    })
-                                .Join(context.Institution,
-                                    loanDetail => loanDetail.InstitutionId,
-                                    institution => institution.InstitutionId,
-                                    (loanDetail, institution) => new LoanDetail
-                                    {
-                                        StudentId = loanDetail.StudentId,
-                                        FirstName = loanDetail.FirstName,
-                                        LastName = loanDetail.LastName,
-                                        LoanAmount = loanDetail.LoanAmount,
-                                        InstitutionId = loanDetail.InstitutionId,
-                                        InstitutionName = institution.Name
-                                    });
+            return context.Loan.AsNoTracking().Join(context.Student.AsNoTracking(),
+                                                    loan => loan.StudentId,
+                                                    student => student.StudentId,
+                                                    (loan, student) => new LoanDetail
+                                                    {
+                                                        StudentId = student.StudentId,
+                                                        FirstName = student.FirstName,
+                                                        LastName = student.LastName,
+                                                        LoanAmount = loan.LoanAmount,
+                                                        InstitutionId = loan.InstitutionId
+                                                    })
+                                                .Join(context.Institution.AsNoTracking(),
+                                                    loanDetail => loanDetail.InstitutionId,
+                                                    institution => institution.InstitutionId,
+                                                    (loanDetail, institution) => new LoanDetail
+                                                    {
+                                                        StudentId = loanDetail.StudentId,
+                                                        FirstName = loanDetail.FirstName,
+                                                        LastName = loanDetail.LastName,
+                                                        LoanAmount = loanDetail.LoanAmount,
+                                                        InstitutionId = loanDetail.InstitutionId,
+                                                        InstitutionName = institution.Name
+                                                    });
         }
 
     }

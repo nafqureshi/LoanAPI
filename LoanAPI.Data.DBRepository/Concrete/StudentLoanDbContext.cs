@@ -1,5 +1,8 @@
 ﻿using LoanAPI.Data.DBRepository.Entity;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
+using System.Transactions;
 
 namespace LoanAPI.Data.DBRepository.Concrete
 {
@@ -25,21 +28,27 @@ namespace LoanAPI.Data.DBRepository.Concrete
             Student.Add(student);
             Institution.Add(institution);
             SaveChanges();
+            this.Attach(student).State = EntityState.Detached;
+            this.Attach(institution).State = EntityState.Detached;
 
             loan.StudentId = student.StudentId;
             loan.InstitutionId = institution.InstitutionId;
             Loan.Add(loan);
-
             SaveChanges();
+            this.Attach(loan).State = EntityState.Detached;
         }
 
         public void UpdateLoanDetails(Student student, Institution institution, Loan loan)
-        {
+        {            
             Update(student);
             Update(institution);
-            Update(loan);
-
             SaveChanges();
+            this.Attach(student).State = EntityState.Detached;
+            this.Attach(institution).State = EntityState.Detached;
+
+            Update(loan);
+            SaveChanges();
+            this.Attach(loan).State = EntityState.Detached;
         }
     }
 }

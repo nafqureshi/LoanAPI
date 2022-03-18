@@ -15,6 +15,6 @@ namespace LoanAPI.Services.Repository.Model
 
         public string InstitutionName { get; set; }
 
-        public decimal LoanAmount { get; set; }
+        public int LoanAmount { get; set; }
     }
 }

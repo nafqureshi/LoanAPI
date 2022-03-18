@@ -31,7 +31,7 @@ namespace LoanAPI.Services.Unit.Test
                 FirstName = "Abdun",
                 LastName = "Nafay",
                 InstitutionName = "fin",
-                LoanAmount = 1000m
+                LoanAmount = 1000
             };
 
 
@@ -42,7 +42,7 @@ namespace LoanAPI.Services.Unit.Test
                 FirstName = "Abdun",
                 LastName = "Nafay",
                 InstitutionName = "fin",
-                LoanAmount = 1000m
+                LoanAmount = 1000
             };
 
             //Act
