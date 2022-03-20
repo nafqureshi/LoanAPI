@@ -51,7 +51,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'PaymentAPIAbdun'
+          app-name: 'LoanAPIAbdun'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_AD46C327B6CF4EC98C152F6C02C21733 }}
           package: .
