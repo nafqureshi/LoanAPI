@@ -39,7 +39,6 @@ namespace LoanAPI.Controllers
         }
 
         // GET: api/Loan
-        [HttpGet]
         [HttpGet("test")]
         public ActionResult<string> GetTest()
         {
