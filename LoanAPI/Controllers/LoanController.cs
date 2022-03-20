@@ -38,6 +38,14 @@ namespace LoanAPI.Controllers
             return LoanService.GetLoanDetails().ToList();
         }
 
+        // GET: api/Loan
+        [HttpGet]
+        [HttpGet("test")]
+        public ActionResult<string> GetTest()
+        {
+            return "Test for CI CD";
+        }
+
         // POST: api/PostLoanDetail
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
