@@ -17,7 +17,7 @@ namespace LoanAPI.Controllers
     {
         public ILoanService LoanService { get; set; }
 
-        // GET: api/Loan/studentId/5/institutionId/6
+        // GET: api/Loan/studentId/5/institutionId/7
         [HttpGet("studentId/{studentId}/institutionId/{institutionId}")]
         public ActionResult<LoanDetail> GetLoanDetail(int studentId, int institutionId)
         {
